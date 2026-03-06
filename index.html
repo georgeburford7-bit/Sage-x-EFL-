@@ -373,17 +373,172 @@ header{
 .ai-chip:hover{background:rgba(0,179,136,0.18);border-color:rgba(0,179,136,0.5);color:#e8f4f0}
 #ai-suggestions.hidden{display:none}
 
+
+/* ── Login Screen ────────────────────────────────────────────────────────── */
+#login-screen{
+  position:fixed;inset:0;z-index:99999;
+  display:flex;align-items:stretch;
+  font-family:'Inter',sans-serif;
+  transition:opacity .5s;
+}
+#login-screen.hidden{opacity:0;pointer-events:none;display:none;}
+
+/* Left panel — full bleed stadium image */
+.login-left{
+  flex:1.2;
+  position:relative;
+  background:#0a1a12 url('https://i.ibb.co/ycH4yP3M/shutterstock-editorial-16608432br.jpg') center/cover no-repeat;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:48px;
+  overflow:hidden;
+}
+.login-left::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.1) 50%,rgba(0,0,0,0.7) 100%);
+}
+.login-left-content{position:relative;z-index:1;}
+.login-left-logo{height:52px;width:auto;margin-bottom:28px;display:block;}
+.login-left-headline{
+  font-size:38px;font-weight:900;line-height:1.1;
+  color:#fff;margin-bottom:12px;letter-spacing:-.01em;
+}
+.login-left-headline span{color:#00b388;}
+.login-left-sub{
+  font-size:13px;color:rgba(255,255,255,0.6);
+  font-weight:400;letter-spacing:.04em;text-transform:uppercase;
+  margin-bottom:32px;
+}
+.login-badges{display:flex;gap:10px;flex-wrap:wrap;}
+.login-badge{
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  backdrop-filter:blur(8px);
+  border-radius:20px;padding:6px 14px;
+  font-size:11px;font-weight:600;color:rgba(255,255,255,0.8);
+  letter-spacing:.03em;
+}
+
+/* Right panel — login form */
+.login-right{
+  width:420px;flex-shrink:0;
+  background:#080f0d;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:48px 40px;
+  position:relative;
+}
+.login-right::before{
+  content:'';position:absolute;top:0;bottom:0;left:0;
+  width:1px;background:linear-gradient(to bottom,transparent,rgba(0,179,136,0.3),transparent);
+}
+.login-right-logo{
+  height:40px;width:auto;margin-bottom:40px;
+  opacity:.7;
+}
+.login-form-title{
+  font-size:22px;font-weight:700;color:#fff;
+  margin-bottom:6px;text-align:center;
+  letter-spacing:-.01em;
+}
+.login-form-sub{
+  font-size:13px;color:rgba(255,255,255,0.35);
+  text-align:center;margin-bottom:36px;
+}
+.login-field{width:100%;margin-bottom:16px;}
+.login-label{
+  display:block;color:rgba(255,255,255,0.45);
+  font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.login-input{
+  width:100%;box-sizing:border-box;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;
+  color:#fff;font-size:14px;font-family:'Inter',sans-serif;
+  padding:13px 16px;
+  outline:none;transition:border .2s,background .2s;
+}
+.login-input:focus{
+  border-color:#00b388;
+  background:rgba(0,179,136,0.06);
+}
+.login-input::placeholder{color:rgba(255,255,255,0.2);}
+.login-btn{
+  width:100%;padding:14px;margin-top:8px;
+  background:linear-gradient(135deg,#00b388,#00c853);
+  border:none;border-radius:10px;
+  color:#fff;font-size:14px;font-weight:700;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;letter-spacing:.04em;text-transform:uppercase;
+  transition:opacity .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(0,179,136,0.3);
+}
+.login-btn:hover{opacity:.92;transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,179,136,0.4);}
+.login-btn:active{transform:translateY(0);}
+.login-error{
+  color:#ff5252;font-size:12px;text-align:center;
+  margin-top:14px;min-height:18px;font-weight:500;
+}
+.login-footer-text{
+  position:absolute;bottom:24px;
+  color:rgba(255,255,255,0.15);font-size:10px;
+  text-align:center;letter-spacing:.04em;
+}
+
+/* Mobile: stack vertically */
+@media(max-width:700px){
+  #login-screen{flex-direction:column;}
+  .login-left{flex:none;min-height:220px;padding:32px 24px;}
+  .login-left-headline{font-size:26px;}
+  .login-right{width:100%;padding:32px 24px;}
+  .login-right::before{display:none;}
+}
 </style>
 <link rel="preconnect" href="https://i.ibb.co">
 <link rel="dns-prefetch" href="https://i.ibb.co">
 </head>
 <body>
-<div id="loading">
-  <img decoding="async" src="https://i.ibb.co/JF8xXxtJ/efl-sage-lockup-1.webp" alt="EFL x Sage" onclick="var hb=document.querySelector('.nb[data-id=home]');if(!hb){var btns=document.querySelectorAll('.nb');if(btns.length)btns[0].click();}else{hb.click();}" style="cursor:pointer" title="Go to Home">
-  <div id="pt"><div id="pb"></div></div>
-  <p>Warming Up</p>
-</div>
-<header>
+
+<!-- ── Login Screen ──────────────────────────────────────────────────────── -->
+<div id="login-screen">
+
+  <!-- Left: stadium hero + branding -->
+  <div class="login-left">
+    <div class="login-left-content">
+      <img class="login-left-logo" src="https://i.ibb.co/JF8xXxtJ/efl-sage-lockup-1.webp" alt="EFL x Sage">
+      <h1 class="login-left-headline">Official Accounting<br>Software Partner<br><span>of the EFL.</span></h1>
+      <p class="login-left-sub">2025/26 Season · Live Partnership Reporting</p>
+      <div class="login-badges">
+        <span class="login-badge">Championship</span>
+        <span class="login-badge">League One</span>
+        <span class="login-badge">League Two</span>
+        <span class="login-badge">Carabao Cup</span>
+        <span class="login-badge">EFL Trophy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: login form -->
+  <div class="login-right">
+    <img class="login-right-logo" src="https://i.ibb.co/JF8xXxtJ/efl-sage-lockup-1.webp" alt="EFL x Sage">
+    <h2 class="login-form-title">Partnership Reporting</h2>
+    <p class="login-form-sub">Your live 2025/26 season dashboard</p>
+    <div class="login-field">
+      <label class="login-label" for="login-email">Email address</label>
+      <input class="login-input" type="email" id="login-email" placeholder="your@email.com" autocomplete="email">
+    </div>
+    <div class="login-field">
+      <label class="login-label" for="login-password">Password</label>
+      <input class="login-input" type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="login-btn" onclick="attemptLogin()">Access Dashboard</button>
+    <div class="login-error" id="login-error"></div>
+    <p class="login-footer-text">Confidential · Authorised access only</p>
+  </div>
+
+</div><header>
   <div class="hi">
     <img decoding="async" src="https://i.ibb.co/JF8xXxtJ/efl-sage-lockup-1.webp" alt="EFL x Sage" onclick="var hb=document.querySelector('.nb[data-id=home]');if(!hb){var btns=document.querySelectorAll('.nb');if(btns.length)btns[0].click();}else{hb.click();}" style="cursor:pointer" title="Go to Home">
     <span class="ht"> Partnership Reporting &middot; Live</span>
@@ -1229,7 +1384,7 @@ try{
 (async function init(){var p=0;var pi=setInterval(function(){p=Math.min(p+6,82);setProgress(p);},160);await fetchAndBuild(true);clearInterval(pi);setProgress(100);setInterval(function(){fetchAndBuild(false);},5*60*1000);})();
 </script>
 <div id="tmpl-home" style="display:none"><div class="home-wrap"><div class="home-hero" style="background-color:#0d1f19" data-bg="https://i.ibb.co/ycH4yP3M/shutterstock-editorial-16608432br.jpg"><div class="home-hero-overlay"><img decoding="async" src="https://i.ibb.co/JF8xXxtJ/efl-sage-lockup-1.webp" class="home-logo" alt="EFL x Sage"><h1 class="home-title">Welcome to the Sage x EFL<br>Reporting Dashboard</h1><p class="home-subtitle">Season 2025/26 &middot; Live Partnership Reporting</p></div></div><div class="home-body"><div class="home-intro card"><div class="home-intro-text"><h2 class="home-section-title">About This Dashboard</h2><p>Live performance tracking for the Sage x EFL partnership across the 2025/26 season. Built around three objectives: grow Sage brand awareness among accountants and small businesses, drive consideration and preference in the market, and deliver measurable commercial attribution through the EFL platform.</p><p style="margin-top:10px">Data refreshes automatically every 5 minutes. Use the tabs to explore performance across reach, engagement, digital, ticketing, and brand health metrics.</p></div><div class="home-intro-stats"><div class="home-stat"><div class="home-stat-label">Season</div><div class="home-stat-val">2025/26</div></div><div class="home-stat"><div class="home-stat-label">Competitions</div><div class="home-stat-val">5</div></div><div class="home-stat"><div class="home-stat-label">Data</div><div class="home-stat-val">Live</div></div><div class="home-stat"><div class="home-stat-label">Tabs</div><div class="home-stat-val">11</div></div></div></div></div><div class="home-tabs-guide"><h2 class="home-section-title" style="margin-bottom:14px">What's Inside</h2><div class="home-guide-grid"><div class="home-guide-card" style="--gc:#00b388"><div class="home-guide-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg></div><div class="home-guide-label">Broadcast</div><div class="home-guide-desc">TV viewership across all EFL competitions, tracked cumulatively vs last season.</div></div><div class="home-guide-card" style="--gc:#009ee3"><div class="home-guide-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><div class="home-guide-label">Attendance</div><div class="home-guide-desc">In-stadium attendance across Championship, League One, League Two and cup competitions.</div></div><div class="home-guide-card" style="--gc:#f4a024"><div class="home-guide-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div><div class="home-guide-label">Social Media</div><div class="home-guide-desc">Owned social impressions, CTR, OOH and campaign performance month by month.</div></div><div class="home-guide-card" style="--gc:#7ecfc0"><div class="home-guide-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M20 12c0-1.1.9-2 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v4c1.1 0 2 .9 2 2s-.9 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2zm-4.42 4.8L12 14.5l-3.58 2.3 1.08-4.12-3.29-2.69 4.24-.25L12 5.8l1.54 3.95 4.24.25-3.29 2.69 1.09 4.11z"/></svg></div><div class="home-guide-label">Ticketing</div><div class="home-guide-desc">GA and hospitality ticket usage by club, with an interactive map and channel breakdown.</div></div><div class="home-guide-card" style="--gc:#f7c46a"><div class="home-guide-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div><div class="home-guide-label">Digital</div><div class="home-guide-desc">Sage.com sessions driven by the partnership, tracked month by month.</div></div><div class="home-guide-card" style="--gc:#a78bfa"><div class="home-guide-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg></div><div class="home-guide-label">Email / CRM</div><div class="home-guide-desc">Campaign send volumes, open rates and click-through rates across all Sage email activity.</div></div><div class="home-guide-card" style="--gc:#00b388"><div class="home-guide-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg></div><div class="home-guide-label">Brand Tracking</div><div class="home-guide-desc">Wave 1 vs Wave 2 brand health: Awareness, Consideration and Preference vs Xero &amp; QuickBooks.</div></div></div></div></div></div></div>
-<div id="tmpl-gallery" style="display:none"><div class="home-body"><h2 class="home-section-title" style="margin-bottom:10px">Season Image Gallery</h2><p style="color:var(--muted);font-size:12px;margin-bottom:24px;line-height:1.7">All partnership photography from the 2025/26 season is stored in our shared image library. Click below to browse and download.</p><a href="https://teamwass.box.com/s/94ay19srizhm6me3osi2rfz0qeh2zm81" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:rgba(0,179,136,0.08);border:1px solid rgba(0,179,136,0.3);color:#00b388;padding:14px 24px;border-radius:10px;font-size:12px;font-weight:900;letter-spacing:.06em;text-decoration:none;transition:all .2s"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M12 15.2A3.2 3.2 0 0 1 8.8 12 3.2 3.2 0 0 1 12 8.8 3.2 3.2 0 0 1 15.2 12 3.2 3.2 0 0 1 12 15.2M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg> Open Image Gallery <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="vertical-align:middle;margin-left:2px"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a><p style="color:var(--muted);font-size:10px;margin-top:14px">Opens in a new tab &middot; Right-click any image to save</p></div></div>
+<div id="tmpl-gallery" style="display:none"><div class="home-body"><h2 class="home-section-title" style="margin-bottom:10px">Season Image Gallery</h2><p style="color:var(--muted);font-size:12px;margin-bottom:24px;line-height:1.7">All partnership photography from the 2025/26 season is stored in our shared image library. Click below to browse and download.</p><a href="https://teamwass.box.com/s/a06i94b51uvbkk0vzxv1m00spwuypl6e" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:rgba(0,179,136,0.08);border:1px solid rgba(0,179,136,0.3);color:#00b388;padding:14px 24px;border-radius:10px;font-size:12px;font-weight:900;letter-spacing:.06em;text-decoration:none;transition:all .2s"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle"><path d="M12 15.2A3.2 3.2 0 0 1 8.8 12 3.2 3.2 0 0 1 12 8.8 3.2 3.2 0 0 1 15.2 12 3.2 3.2 0 0 1 12 15.2M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg> Open Image Gallery <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="vertical-align:middle;margin-left:2px"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a><p style="color:var(--muted);font-size:10px;margin-top:14px">Opens in a new tab &middot; Right-click any image to save</p></div></div>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
   function initImgWraps(){
@@ -1483,6 +1638,67 @@ async function sendChat(){
 }
 
 </script>
+<script>
+
+// ── Login ─────────────────────────────────────────────────────────────────
+var USERS = [
+  { email: 'george.burford@teamwass.com', password: 'englishfootballleague2024' }
+];
+var LOGIN_KEY = 'sageEFLauth';
+
+function checkLogin(){
+  var saved = localStorage.getItem(LOGIN_KEY);
+  if(saved){
+    try{
+      var d = JSON.parse(atob(saved));
+      if(d.ok && d.ts && (Date.now()-d.ts) < 30*24*60*60*1000){ // 30 days
+        hideLoginScreen();
+        return;
+      }
+    }catch(e){}
+  }
+  document.getElementById('login-screen').classList.remove('hidden');
+  // Focus email field
+  setTimeout(function(){ document.getElementById('login-email').focus(); }, 100);
+}
+
+function attemptLogin(){
+  var email    = (document.getElementById('login-email').value||'').trim().toLowerCase();
+  var password = (document.getElementById('login-password').value||'').trim();
+  var err      = document.getElementById('login-error');
+  err.textContent = '';
+
+  var match = USERS.find(function(u){
+    return u.email.toLowerCase()===email && u.password===password;
+  });
+
+  if(match){
+    localStorage.setItem(LOGIN_KEY, btoa(JSON.stringify({ok:true, email:email, ts:Date.now()})));
+    hideLoginScreen();
+  } else {
+    err.textContent = 'Incorrect email or password.';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-password').focus();
+  }
+}
+
+function hideLoginScreen(){
+  var ls = document.getElementById('login-screen');
+  if(ls){ ls.style.opacity='0'; ls.style.transition='opacity .4s'; setTimeout(function(){ls.classList.add('hidden');ls.style.opacity='';},400); }
+}
+
+// Allow pressing Enter to submit
+document.addEventListener('keydown', function(e){
+  if(e.key==='Enter'){
+    var ls = document.getElementById('login-screen');
+    if(ls && !ls.classList.contains('hidden')) attemptLogin();
+  }
+});
+
+// Run login check immediately
+checkLogin();
+
+</script>
 </body>
 </html>
 <script>
@@ -1633,6 +1849,67 @@ async function sendChat(){
   input.focus();
 }
 
+
+</script>
+<script>
+
+// ── Login ─────────────────────────────────────────────────────────────────
+var USERS = [
+  { email: 'george.burford@teamwass.com', password: 'englishfootballleague2024' }
+];
+var LOGIN_KEY = 'sageEFLauth';
+
+function checkLogin(){
+  var saved = localStorage.getItem(LOGIN_KEY);
+  if(saved){
+    try{
+      var d = JSON.parse(atob(saved));
+      if(d.ok && d.ts && (Date.now()-d.ts) < 30*24*60*60*1000){ // 30 days
+        hideLoginScreen();
+        return;
+      }
+    }catch(e){}
+  }
+  document.getElementById('login-screen').classList.remove('hidden');
+  // Focus email field
+  setTimeout(function(){ document.getElementById('login-email').focus(); }, 100);
+}
+
+function attemptLogin(){
+  var email    = (document.getElementById('login-email').value||'').trim().toLowerCase();
+  var password = (document.getElementById('login-password').value||'').trim();
+  var err      = document.getElementById('login-error');
+  err.textContent = '';
+
+  var match = USERS.find(function(u){
+    return u.email.toLowerCase()===email && u.password===password;
+  });
+
+  if(match){
+    localStorage.setItem(LOGIN_KEY, btoa(JSON.stringify({ok:true, email:email, ts:Date.now()})));
+    hideLoginScreen();
+  } else {
+    err.textContent = 'Incorrect email or password.';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-password').focus();
+  }
+}
+
+function hideLoginScreen(){
+  var ls = document.getElementById('login-screen');
+  if(ls){ ls.style.opacity='0'; ls.style.transition='opacity .4s'; setTimeout(function(){ls.classList.add('hidden');ls.style.opacity='';},400); }
+}
+
+// Allow pressing Enter to submit
+document.addEventListener('keydown', function(e){
+  if(e.key==='Enter'){
+    var ls = document.getElementById('login-screen');
+    if(ls && !ls.classList.contains('hidden')) attemptLogin();
+  }
+});
+
+// Run login check immediately
+checkLogin();
 
 </script>
 </body>
